@@ -358,7 +358,7 @@ All tables have a primary key with one column and have columns for creation, las
 |Warehouse|ProductCategory|
 |Warehouse|ProductInventory|
 
-You can found the scripts for database in this link: [`https://github.com/hherzl/EntityFrameworkCore2ForEnterprise/tree/master/Resources/Database`](Online Store Database Scripts on GitHub).
+You can found the scripts for database in this link: [`Online Store Database Scripts on GitHub`](https://github.com/hherzl/EntityFrameworkCore2ForEnterprise/tree/master/Resources/Database).
 
 Please remember: This is a sample database, only for demonstration of concepts.
 
@@ -1298,16 +1298,16 @@ Additionally, there are more settings for Entity Framework Core project instance
 
 ## Points of Interest
 
-    * CatFactory doesn't have command line for nuget because from my point of view it will be a big trouble to allow set values for all settings because we have a lot of settings for EntityFrameworkCoreProjectSettings, I think at this moment is more simple to create a console project to generate the code and then developer move generated files for existing project and make a code refactor if applies
-    * CatFactory doesn't have UI now because at the beginning of this project .NET Core had no an standard UI, but we're working on UI for CatFactory maybe we'll choose Angular =^^=
-    * Now we are focused on Entity Framework Core and Dapper but in future there will be Web API, Unit Tests and other things :)
-    * CatFactory has a package for Dapper, at this moment there isn't article for that but the way to use is similar for Entity Framework Core; you can install CatFactory.Dapper package from nuget
-    * We're working in continuous updates to provide better help for user
+* CatFactory doesn't have command line for nuget because from my point of view it will be a big trouble to allow set values for all settings because we have a lot of settings for EntityFrameworkCoreProjectSettings, I think at this moment is more simple to create a console project to generate the code and then developer move generated files for existing project and make a code refactor if applies
+* CatFactory doesn't have UI now because at the beginning of this project .NET Core had no an standard UI, but we're working on UI for CatFactory maybe we'll choose Angular =^^=
+* Now we are focused on Entity Framework Core and Dapper but in future there will be Web API, Unit Tests and other things :)
+* CatFactory has a package for Dapper, at this moment there isn't article for that but the way to use is similar for Entity Framework Core; you can install CatFactory.Dapper package from nuget
+* We're working in continuous updates to provide better help for user
 
 ## Related Links
 
-    [`Entity Framework Core 2 for Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-for-Enterprise)
-    [`Creating Web API in ASP.NET Core 2.0 `](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
+[`Entity Framework Core 2 for Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-for-Enterprise)
+[`Creating Web API in ASP.NET Core 2.0 `](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
 
 ## Code Improvements
 
