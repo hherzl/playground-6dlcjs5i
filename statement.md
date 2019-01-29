@@ -1307,6 +1307,7 @@ Additionally, there are more settings for Entity Framework Core project instance
 ## Related Links
 
 [`Entity Framework Core 2 for Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-for-Enterprise)
+
 [`Creating Web API in ASP.NET Core 2.0 `](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
 
 ## Code Improvements
@@ -1321,4 +1322,5 @@ Additionally, there are more settings for Entity Framework Core project instance
 If you get any exception with CatFactory packages, please use these links:
 
 [`Issue tracker for CatFactory.SqlServer in GitHub`](https://github.com/hherzl/CatFactory.SqlServer/issues)
+
 [`Issue tracker for CatFactory.EntityFrameworkCore in GitHub`](https://github.com/hherzl/CatFactory.EntityFrameworkCore/issues)
