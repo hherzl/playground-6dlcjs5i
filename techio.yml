@@ -1,4 +1,4 @@
-title: Simple C# Template
+title: Scaffolding Entity Framework Core 2 with CatFactory
 plan:
-- title: C# Snippet
+- title: Scaffolding Entity Framework Core 2 with CatFactory
   statement: statement.md
