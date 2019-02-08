@@ -1321,6 +1321,6 @@ Additionally, there are more settings for Entity Framework Core project instance
 
 If you get any exception with CatFactory packages, please use these links:
 
-[`Issue tracker for CatFactory.SqlServer in GitHub`](https://github.com/hherzl/CatFactory.SqlServer/issues)
+[`Issue tracker`](https://github.com/hherzl/CatFactory.SqlServer/issues) for CatFactory.SqlServer in GitHub
 
-[`Issue tracker for CatFactory.EntityFrameworkCore in GitHub`](https://github.com/hherzl/CatFactory.EntityFrameworkCore/issues)
+[`Issue tracker`](https://github.com/hherzl/CatFactory.EntityFrameworkCore/issues) for CatFactory.EntityFrameworkCore in GitHub
