@@ -463,7 +463,7 @@ var dbContext = new OnlineStoreDbContext(options);
 using (var repository = new SalesRepository(dbContext))
 {
     // Get "in memory" query
-    var query = repository.GetOrders();
+    var query = repository.GetOrderHeaders();
     
     // Get paging info
     var totalItems = await query.CountAsync();
@@ -552,7 +552,7 @@ var dbContext = new OnlineStoreDbContext(options);
 using (var repository = new SalesRepository(dbContext))
 {
     // Retrieve entity by id instance for entity
-    var entity = await repository.GetOrderHeaderAsync(new Order(1));
+    var entity = await repository.GetOrderHeaderAsync(new OrderHeader(1));
     
     // Set values for properties
     // e.g. entity.Total = 29.99m;
@@ -576,7 +576,7 @@ var dbContext = new OnlineStoreDbContext(options);
 using (var repository = new SalesRepository(dbContext))
 {
     // Retrieve entity by id instance for entity
-    var entity = await repository.GetOrderHeaderAsync(new Order(1));
+    var entity = await repository.GetOrderHeaderAsync(new OrderHeader(1));
     
     // Remove entity in database
     repository.Remove(entity);
