@@ -299,12 +299,12 @@ This package provides scaffolding for Type Script.
 
 ### Trivia
 
-    * The name for this framework it was F4N1 before than CatFactory
-    * Framework's name is related to kitties
-    * Import logic uses sp_help stored procedure to retrieve the database object's definition, I learned that in my database course at college
-    * Load mapping for entities with MEF, it's inspired in "OdeToCode" (Scott Allen) article for Entity Framework 6.x
-    * Expose all settings in one class inside of project's definition is inspired on DevExpress settings for Web controls (Web Forms)
-    * Dapper implementation exists thanks to Edson Ferreira
+* The name for this framework it was F4N1 before than CatFactory
+* Framework's name is related to kitties
+* Import logic uses sp_help stored procedure to retrieve the database object's definition, I learned that in my database course at college
+* Load mapping for entities with MEF, it's inspired in "OdeToCode" (Scott Allen) article for Entity Framework 6.x
+* Expose all settings in one class inside of project's definition is inspired on DevExpress settings for Web controls (Web Forms)
+* Dapper implementation exists thanks to Edson Ferreira
 
 ## Prerequisites
 
@@ -490,7 +490,7 @@ var dbContext = new OnlineStoreDbContext(options);
 using (var repository = new SalesRepository(dbContext))
 {
     // Get entity by id
-    var entity = await repository.GetOrderAsync(new Order(1));
+    var entity = await repository.GetOrderHeaderAsync(new OrderHeader(1));
 }
 ```
 
@@ -526,7 +526,7 @@ var dbContext = new OnlineStoreDbContext(options);
 using (var repository = new SalesRepository(dbContext))
 {
     // Create instance for entity
-    var entity = new Order();
+    var entity = new OrderHeader();
     
     // Set values for properties
     // e.g. entity.Total = 29.99m;
@@ -1308,7 +1308,7 @@ Additionally, there are more settings for Entity Framework Core project instance
 
 [`Entity Framework Core 2 for Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-for-Enterprise)
 
-[`Creating Web API in ASP.NET Core 2.0 `](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
+[`Creating Web API in ASP.NET Core 2.0`](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
 
 ## Code Improvements
 
