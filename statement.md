@@ -377,6 +377,7 @@ Is a package that allows to scaffold Dapper using scaffolding engine provided by
 ### Skills
 
     C#
+	Object Relational Mapping
     Design Patterns (Repository and Unit of Work)
 
 ### Software
@@ -427,7 +428,7 @@ Please remember: This is a sample database, only for demonstration of concepts.
 
 ### Step 02 - Create project
 
-Create a console application for .NET Core, in some cases you can add one project to your existing solution but with some name or sufix that indicates it's a project to scaffold, for example: *OnLineStore.CatFactory.EntityFrameworkCore.*
+Create a console application for .NET Core, in some cases you can add one project to your existing solution but with some name or sufix that indicates it's a project to scaffold, for example: *OnLineStore.CatFactory.EntityFrameworkCore*.
 
 Add the following packages for your project:
 
@@ -439,14 +440,14 @@ Add the following packages for your project:
 #### Install with Nuget UI
 
 	Right Click on Project
-	Select *Manage Nuget Packages*
-	Select *Browse* tab
+	Select Manage Nuget Packages
+	Select Browse tab
 
 #### Install with Package Manager Console
 
-	Go to *Tools* menu
-	Select *Nuget Package Manager*
-	Select *Package Manager Console*
+	Go to Tools menu
+	Select Nuget Package Manager
+	Select Package Manager Console
 
 Run this command: **Install-Package CatFactory.EntityFrameworkCore -Version 1.0.0-beta-sun-build35**.
 
@@ -454,7 +455,7 @@ Save all changes and build the project.
 
 ### Step 03 - Add Code to scaffold
 
-Once we have the packages installed on our project, we can add code in Main method:
+Once We have the packages installed on our project, We can add the following code in *Main* method:
 
 ```csharp
 // Create database factory
@@ -662,11 +663,11 @@ using (var repository = new SalesRepository(dbContext))
 }
 ```
 
-How works all code together?
+#### How works all code together?
 
-We create a StoreDbContext instance, that instance use the connection string from DbContextOptionsBuilder and inside of OnModelCreating method there is the configuration for all mappings, that's because it's more a stylish way to mapping entities instead of add a lot of lines inside of OnModelCreating.
+We have created a *OnlineStoreDbContext* instance, that instance use the connection string from *DbContextOptionsBuilder* and inside of *OnModelCreating* method there is the configuration for all mappings, that's because it's more a stylish way to mapping entities instead of add a lot of lines inside of *OnModelCreating*.
 
-Later, for example we create an instance of SalesRepository passing a valid instance of StoreDbContext and then we can access to repository's operations.
+Later, for example we create an instance of SalesRepository passing a valid instance of *OnlineStoreDbContext* and then we can access to repository's operations.
 
 For this architecture implementation we are using the DotNet naming conventions: PascalCase for classes, interfaces and methods; camelCase for parameters.
 
@@ -1359,39 +1360,22 @@ namespace OnLineStore.Core.DataLayer.Repositories
 }
 ```
 
-AuditEntity in settings sets the columns for audit, this version of CatFactory supports creation and last update for audit.
-
-ConcurrencyToken sets the column for concurrency, this value will be use in entity's mapping.
-
-Don't forget, the previous settings are about columns, we need to use the name of columns not the properties.
-
-EntitiesWithDataContracts indicates that entities will scaffold with joins in linq, this means CatFactory engine reads all foreign keys and create a data contract to retrieve information, if we take a look on GetOrders method on SalesRepository, we can see a linq query with data contract and not a lambda expression as GetShippers method.
-
-Please take a look on all operations in repositories, they are async operations.
-
-## Setting Up CatFactory for Entity Framework Core
-
-Additionally, there are more settings for Entity Framework Core project instance, we'll take a look on those settings:
-
 ## Points of Interest
 
-* CatFactory doesn't have command line for nuget because from my point of view it will be a big trouble to allow set values for all settings because we have a lot of settings for EntityFrameworkCoreProjectSettings, I think at this moment is more simple to create a console project to generate the code and then developer move generated files for existing project and make a code refactor if applies
-* CatFactory doesn't have UI now because at the beginning of this project .NET Core had no an standard UI, but we're working on UI for CatFactory maybe we'll choose Angular =^^=
-* Now we are focused on Entity Framework Core and Dapper but in future there will be Web API, Unit Tests and other things :)
-* CatFactory has a package for Dapper, at this moment there isn't article for that but the way to use is similar for Entity Framework Core; you can install CatFactory.Dapper package from nuget
-* We're working in continuous updates to provide better help for user
+* **CatFactory** doesn't have command line for Nuget because from my point of view it will be a big trouble to allow set values for all settings because we have a lot of settings for EntityFrameworkCoreProjectSettings, I think at this moment is more simple to create a console project to generate the code and then developer move generated files for existing project and make a code refactor if applies
+* **CatFactory** doesn't have UI now because at the beginning of this project .NET Core had no an standard UI, but we're working on UI for **CatFactory** maybe we'll choose Angular =^^=
+* Now we are focused on Entity Framework Core and *Dapper* but in future there will be Web API, Unit Tests and other things :)
+* **CatFactory** has a package for *Dapper*, at this moment there isn't article for that but the way to use is similar for *Entity Framework Core*; you can install **CatFactory.Dapper** package from Nuget
+* We're working in continuous updates to provide better help for developers
 
 ## Related Links
 
-[`Entity Framework Core 2 for Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-for-Enterprise)
+[`Entity Framework Core 2 for the Enterprise`](https://www.codeproject.com/Articles/1160586/Entity-Framework-Core-2-for-the-Enterprise)
 
 [`Creating Web API in ASP.NET Core 2.0`](https://www.codeproject.com/Articles/1264219/Creating-Web-API-in-ASP-NET-Core-2-0)
 
 ## Code Improvements
 
-    Add support for table functions
-    Add support for stored procedures
-    Allow to overwrite naming convention for project
     Add author's information for output files
 
 ### Bugs?
