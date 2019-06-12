@@ -430,14 +430,28 @@ Please remember: This is a sample database, only for demonstration of concepts.
 
 ### Step 02 - Create project
 
-Create a console application for .NET Core, in some cases you can add one project to your existing solution but with some name or sufix that indicates it's a project to scaffold, for example: OnLineStore.CatFactory.EntityFrameworkCore.
+Create a console application for .NET Core, in some cases you can add one project to your existing solution but with some name or sufix that indicates it's a project to scaffold, for example: *OnLineStore.CatFactory.EntityFrameworkCore.*
 
 Add the following packages for your project:
 
 |Name|Version|Description|
 |----|-------|-----------|
-|CatFactory.SqlServer|1.0.0-beta-sun-build27|Provides import feature for SQL Server databases|
-|CatFactory.EntityFrameworkCore|1.0.0-beta-sun-build25|Provides scaffold for Entity Framework Core|
+|**CatFactory.SqlServer**|1.0.0-beta-sun-build27|Provides import feature for SQL Server databases|
+|**CatFactory.EntityFrameworkCore**|1.0.0-beta-sun-build25|Provides scaffold for Entity Framework Core|
+
+#### Install with Nuget UI
+
+Right Click on Project
+Select *Manage Nuget Packages*
+Select *Browse* tab
+
+#### Install with Package Manager Console
+
+Go to *Tools* menu
+Select *Nuget Package Manager*
+Select *Package Manager Console*
+
+Run this command: **Install-Package CatFactory.EntityFrameworkCore -Version 1.0.0-beta-sun-build35**.
 
 Save all changes and build the project.
 
@@ -653,7 +667,7 @@ using (var repository = new SalesRepository(dbContext))
 
 How works all code together?
 
-We create a StoreDbContext instance, that instance use the connection string from DbContextOptionsBuilder and inside of OnModelCreating method there is the configuration for all mappings, that's because it's more a stylish way to mapping entities instead of add a lot of lines inside of OnModelCreating
+We create a StoreDbContext instance, that instance use the connection string from DbContextOptionsBuilder and inside of OnModelCreating method there is the configuration for all mappings, that's because it's more a stylish way to mapping entities instead of add a lot of lines inside of OnModelCreating.
 
 Later, for example we create an instance of SalesRepository passing a valid instance of StoreDbContext and then we can access to repository's operations.
 
