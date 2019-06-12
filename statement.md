@@ -171,140 +171,206 @@ project.ScaffoldedDefinition += (source, args) =>
 
 ## Packages
 
-### CatFactory
+	* CatFactory
+	* CatFactory.SqlServer
+	* CatFactory.NetCore
+	* CatFactory.EntityFrameworkCore
+	* CatFactory.AspNetCore
+	* CatFactory.Dapper
+	* CatFactory.TypeScript
 
-This package provides all definitions for CatFactory engine, this is the core for child packages.
+You can check the download statistics for **CatFactory** packages in [`NuGet Gallery`](https://www.nuget.org/packages?q=CatFactory).
 
-#### Namespaces
+## Background
 
-**CodeFactory**: Contains objects to perform code generation.
+Generate code is a common task in software developer, most developers write a "code generator" in their lives.
 
-**Diagnostics**: Contains objects for diagnostics.
+Using Entity Framework 6.x, I worked with EF wizard and it's a great tool even with limitations like:
 
-**Markup**: Contains objects for markup languages.
+	No scaffolding for Fluent API
+	No scaffolding for Repositories
+	No scaffolding for Unit of Work
+	Custom scaffolding is so complex or in some cases impossible
 
-**ObjectOrientedProgramming**: Contains objects to modeling definitions: classes, interfaces and enums.
+With *Entity Framework Core*, I worked with command line to scaffold from existing database, EF Core team provided a great tool with command line but there are still the same limitations above.
 
-**ObjectRelationalMapping**: Contains objects for ORM: database, tables, views, scalar functions, table functions and stored procedures.
+So, **CatFactory** pretends to solve those limitations and provide a simple way to scaffold *Entity Framework Core*.
 
-### CatFactory.SqlServer
+*StringBuilder* was used to scaffold a class or interface in older versions of **CatFactory** but some years ago, there was a change about how to scaffold a definition (class or interface), **CatFactory** allows to define the structure for class or interface in a simple and clear way, then use an instance of *CodeBuilder* to scaffold in C#.
 
-This packages contains logic to import existing databases from SQL Server instances.
+Let's start with scaffold a class in C#:
 
-|Object|Supported|
-|------|---------|
-|Tables|Yes|
-|Views|Yes|
-|Scalar Functions|Yes|
-|Table Functions|Yes|
-|Stored Procedures|Yes|
-|Sequences|Yes|
-|Extended Properties|Yes|
-|Data Types|Yes|
+```csharp
+var definition = new CSharpClassDefinition
+{
+    Namespace = "OnlineStore.DomainDrivenDesign",
+    AccessModifier = AccessModifier.Public,
+    Name = "StockItem",
+    Properties =
+    {
+        new PropertyDefinition(AccessModifier.Public, "string", "GivenName")
+        {
+            IsAutomatic = true
+        },
+        new PropertyDefinition(AccessModifier.Public, "string", "MiddleName")
+        {
+            IsAutomatic = true
+        },
+        new PropertyDefinition(AccessModifier.Public, "string", "Surname")
+        {
+            IsAutomatic = true
+        },
+        new PropertyDefinition(AccessModifier.Public, "string", "FullName")
+        {
+            IsReadOnly = true,
+            GetBody =
+            {
+                new CodeLine(" return GivenName + (string.IsNullOrEmpty
+                  (MiddleName) ? \"\" : \" \" + MiddleName) + \" \" + Surname)")
+            }
+        }
+    }
+};
 
-### CatFactory.NetCore
+CSharpCodeBuilder.CreateFiles("C:\\Temp", string.Empty, true, definition);
+```
 
-This package contains code builders and definitions for .NET Core (C#).
+This is the output code:
 
-|Object|Members|Supported|
-|------|-------|---------|
-|Struct|All|Not yet|
-|Interface|Inheritance|Yes|
-|Interface|Events|Yes|
-|Interface|Properties|Yes|
-|Interface|Methods|Yes|
-|Class|Inheritance|Yes|
-|Class|Events|Yes|
-|Class|Fields|Yes|
-|Class|Properties|Yes|
-|Class|Methods|Yes|
-|Enum|Options|Yes|
+```csharp
+namespace OnlineStore.DomainDrivenDesign
+{
+	public class StockItem
+	{
+		public string GivenName { get; set; }
 
-### CatFactory.EntityFrameworkCore
+		public string MiddleName { get; set; }
 
-This package provides scaffolding for Entity Framework Core.
+		public string Surname { get; set; }
 
-|Object|Supported|
-|------|---------|
-|Class for table|Yes|
-|Class for view|Yes|
-|Class for table function|Yes|
-|Class for stored procedure result|Not yet|
-|Class for DbContext|Yes|
-|Class for entity configuration (table)|Yes|
-|Class for entity configuration (view)|Yes|
-|Interface for Repository|Yes|
-|Class for Repository|Yes|
-|Method for scalar function invocation|Yes|
-|Method for table function invocation|Yes|
-|Method for stored procedure invocation|Not yet|
+		public string FullName
+			=> GivenName + (string.IsNullOrEmpty(MiddleName) ? "" : " " + 
+                            MiddleName) + " " + Surname;
 
-#### Entity Framework Core 2 Feature Chart
+	}
+}
+```
 
-|Category|Feature|Supported|
-|--------|-------|---------|
-|Modeling|Table splitting|Not yet|
-|Modeling|Owned types|Not yet|
-|Modeling|Model-level query filters|Not yet|
-|Modeling|Database scalar function mapping|Not yet|
-|Modeling|Self-contained type configuration for code first|Not yet|
-|High Performance|DbContext pooling|Not yet|
-|High Performance|Explicitly compiled queries|Not yet|
+To create an object definition like class or interface, these types can be used:
 
-[`New features in EF Core 2.0`](https://docs.microsoft.com/en-us/ef/core/what-is-new/ef-core-2.0)
+	* *EventDefinition*
+	* *FieldDefinition*
+	* *ClassConstructorDefinition*
+	* *FinalizerDefinition*
+	* *IndexerDefinition*
+	* *PropertyDefinition*
+	* *MethodDefinition*
 
-### CatFactory.AspNetCore
+Types like *ClassConstructorDefinition*, *FinalizerDefinition*, *IndexerDefinition*, *PropertyDefinition* and *MethodDefinition* can have code blocks, these blocks are arrays of ILine.
 
-This package provides scaffolding for Asp .NET Core.
+*ILine* interface allows to represent a code line inside of code block, there are different types for lines:
 
-|Feature|Supported|
-|-------|---------|
-|Controllers|Yes|
-|Requests|Yes|
-|Responses|Yes|
-|Scaffold Client|Not yet|
-|Help Page for Web API|Not yet|
-|Unit Tests|Not yet|
-|Integration Tests|Not yet|
+	1. *CodeLine*
+	2. *CommentLine*
+	3. *EmptyLine*
+	4. *PreprocessorDirectiveLine*
+	5. *ReturnLine*
+	6. *TodoLine*
 
-### CatFactory.Dapper
+Let's create a class with methods:
 
-This package provides scaffolding for Dapper.
+```csharp
+var classDefinition = new CSharpClassDefinition
+{
+ Namespace = "OnlineStore.BusinessLayer",
+ AccessModifier = AccessModifier.Public,
+ Name = "WarehouseService",
+ Fields =
+ {
+  new FieldDefinition("OnlineStoreDbContext", "DbContext")
+  {
+   IsReadOnly = true
+  }
+ },
+ Constructors =
+ {
+  new ClassConstructorDefinition
+  {
+   AccessModifier = AccessModifier.Public,
+   Parameters =
+   {
+    new ParameterDefinition("OnlineStoreDbContext", "dbContext")
+   },
+   Lines =
+   {
+    new CodeLine("DbContext = dbContext;")
+   }
+  }
+ },
+ Methods =
+ {
+  new MethodDefinition
+  {
+   AccessModifier = AccessModifier.Public,
+   Type = "IListResponse<StockItem>",
+   Name = "GetStockItems",
+   Lines =
+   {
+    new TodoLine(" Add filters"),
+    new CodeLine("return DbContext.StockItems.ToList();")
+   }
+  }
+ }
+};
 
-|Object|Supported|
-|------|---------|
-|Table|Yes|
-|View|Yes|
-|Scalar Function|Yes|
-|Table Function|Yes|
-|Stored Procedures|Yes|
-|Sequences|Not yet|
+CSharpCodeBuilder.CreateFiles("C:\\Temp", string.Empty, true, definition);
+```
 
-### CatFactory.TypeScript
+This is the output code:
 
-This package provides scaffolding for Type Script.
+```csharp
+namespace OnlineStore.BusinessLayer
+{
+ public class WarehouseService
+ {
+  private readonly OnlineStoreDbContext DbContext;
 
-|Object|Feature|Supported|
-|------|-------|---------|
-|Interface|Inheritance|Yes|
-|Interface|Fields|Yes|
-|Interface|Properties|Yes|
-|Interface|Methods|Yes|
-|Class|Inheritance|Yes|
-|Class|Fields|Yes|
-|Class|Constructors|Yes|
-|Class|Properties|Yes|
-|Class|Methods|Yes|
-|Module|Methods|Yes|
+  public WarehouseService(OnlineStoreDbContext dbContext)
+  {
+   DbContext = dbContext;
+  }
 
-### Trivia
+  public IListResponse<StockItem> GetStockItems()
+  {
+   // todo:  Add filters
+   return DbContext.StockItems.ToList();
+  }
+ }
+}
+```
 
-* The name for this framework it was F4N1 before than CatFactory
-* Framework's name is related to kitties
-* Import logic uses sp_help stored procedure to retrieve the database object's definition, I learned that in my database course at college
-* Load mapping for entities with MEF, it's inspired in "OdeToCode" (Scott Allen) article for Entity Framework 6.x
-* Expose all settings in one class inside of project's definition is inspired on DevExpress settings for Web controls (Web Forms)
-* Dapper implementation exists thanks to Edson Ferreira
+Now let's refact an interface from class:
+
+```csharp
+var interfaceDefinition = classDefinition.RefactInterface();
+
+CSharpCodeBuilder.CreateFiles(@"C:\Temp", string.Empty, true, interfaceDefinition);
+```
+
+This is the output code:
+
+```csharp
+public interface IWarehouseService
+{
+	IListResponse<StockItem> GetStockItems();
+}
+```
+
+I know some developers can reject this design alleging there is a lot of code to scaffold a simple class with 4 properties but keep in mind **CatFactory**'s way looks like a "clear" transcription of definitions.
+
+**CatFactory.NetCore** uses the model from CatFactory to allow scaffold C# code, so the question is: What is **CatFactory.Dapper** package?
+
+Is a package that allows to scaffold Dapper using scaffolding engine provided by **CatFactory**.
 
 ## Prerequisites
 
