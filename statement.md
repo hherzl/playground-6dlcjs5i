@@ -376,17 +376,14 @@ Is a package that allows to scaffold Dapper using scaffolding engine provided by
 
 ### Skills
 
-    OOP
-    AOP
-    ORM
     C#
     Design Patterns (Repository and Unit of Work)
 
 ### Software
 
     .NET Core
-    Visual Studio 2017 or VS Code
-    Access to existing SQL Server instance
+    Visual Studio or VS Code
+    SQL Server
 
 ## Using the code
 
@@ -441,15 +438,15 @@ Add the following packages for your project:
 
 #### Install with Nuget UI
 
-Right Click on Project
-Select *Manage Nuget Packages*
-Select *Browse* tab
+	Right Click on Project
+	Select *Manage Nuget Packages*
+	Select *Browse* tab
 
 #### Install with Package Manager Console
 
-Go to *Tools* menu
-Select *Nuget Package Manager*
-Select *Package Manager Console*
+	Go to *Tools* menu
+	Select *Nuget Package Manager*
+	Select *Package Manager Console*
 
 Run this command: **Install-Package CatFactory.EntityFrameworkCore -Version 1.0.0-beta-sun-build35**.
 
