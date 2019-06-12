@@ -171,13 +171,13 @@ project.ScaffoldedDefinition += (source, args) =>
 
 ## Packages
 
-	* CatFactory
-	* CatFactory.SqlServer
-	* CatFactory.NetCore
-	* CatFactory.EntityFrameworkCore
-	* CatFactory.AspNetCore
-	* CatFactory.Dapper
-	* CatFactory.TypeScript
+	CatFactory
+	CatFactory.SqlServer
+	CatFactory.NetCore
+	CatFactory.EntityFrameworkCore
+	CatFactory.AspNetCore
+	CatFactory.Dapper
+	CatFactory.TypeScript
 
 You can check the download statistics for **CatFactory** packages in [`NuGet Gallery`](https://www.nuget.org/packages?q=CatFactory).
 
@@ -258,24 +258,24 @@ namespace OnlineStore.DomainDrivenDesign
 
 To create an object definition like class or interface, these types can be used:
 
-	* *EventDefinition*
-	* *FieldDefinition*
-	* *ClassConstructorDefinition*
-	* *FinalizerDefinition*
-	* *IndexerDefinition*
-	* *PropertyDefinition*
-	* *MethodDefinition*
+	EventDefinition
+	FieldDefinition
+	ClassConstructorDefinition
+	FinalizerDefinition
+	IndexerDefinition
+	PropertyDefinition
+	MethodDefinition
 
 Types like *ClassConstructorDefinition*, *FinalizerDefinition*, *IndexerDefinition*, *PropertyDefinition* and *MethodDefinition* can have code blocks, these blocks are arrays of ILine.
 
 *ILine* interface allows to represent a code line inside of code block, there are different types for lines:
 
-	1. *CodeLine*
-	2. *CommentLine*
-	3. *EmptyLine*
-	4. *PreprocessorDirectiveLine*
-	5. *ReturnLine*
-	6. *TodoLine*
+	1. CodeLine
+	2. CommentLine
+	3. EmptyLine
+	4. PreprocessorDirectiveLine
+	5. ReturnLine
+	6. TodoLine
 
 Let's create a class with methods:
 
