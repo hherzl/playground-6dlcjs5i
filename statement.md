@@ -442,14 +442,15 @@ Add the following packages for your project:
 	Right Click on Project
 	Select Manage Nuget Packages
 	Select Browse tab
+	Search CatFactory.EntityFrameworkCore
+	Install
 
 #### Install with Package Manager Console
 
 	Go to Tools menu
 	Select Nuget Package Manager
 	Select Package Manager Console
-
-Run this command: **Install-Package CatFactory.EntityFrameworkCore -Version 1.0.0-beta-sun-build35**.
+	Run the following command: Install-Package CatFactory.EntityFrameworkCore -Version 1.0.0-beta-sun-build35
 
 Save all changes and build the project.
 
